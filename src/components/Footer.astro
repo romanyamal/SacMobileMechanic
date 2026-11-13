@@ -17,7 +17,6 @@ const linkClasses =
   "text-gray-400 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm transition-colors";
 const headingClasses = "text-sm font-semibold text-white tracking-wide uppercase mb-4";
 
-// 1. Explicitly map your days union type
 type DayOfWeek = "monday" | "tuesday" | "wednesday" | "thursday" | "friday" | "saturday" | "sunday";
 
 interface HoursGroup {
@@ -32,12 +31,10 @@ const DAY_LABEL: Record<DayOfWeek, string> = {
   monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu", friday: "Fri", saturday: "Sat", sunday: "Sun" 
 };
 
-// FIX 1: Enforce Record validation on DAY_SCHEMA so it maps seamlessly to your loop keys
 const DAY_SCHEMA: Record<DayOfWeek, string> = { 
   monday: "Monday", tuesday: "Tuesday", wednesday: "Wednesday", thursday: "Thursday", friday: "Friday", saturday: "Saturday", sunday: "Sunday" 
 };
 
-// FIX 2: Safely cast siteConfig.hours to prevent implicit 'any' bugs downstream
 const siteHours = siteConfig.hours as Record<DayOfWeek, string>;
 
 function to12Hour(time24: string) {
@@ -55,7 +52,6 @@ function formatRangeDisplay(range: string) {
 
 const hoursGroups: HoursGroup[] = [];
 for (const day of DAY_ORDER) {
-  // Use the typed siteHours reference here
   const display = formatRangeDisplay(siteHours[day]);
   const last = hoursGroups[hoursGroups.length - 1];
   
@@ -72,7 +68,6 @@ const hoursDisplayLines = hoursGroups.map((g) =>
     : `${DAY_LABEL[g.start]}–${DAY_LABEL[g.end]}: ${g.display}`
 );
 
-// schema.org openingHoursSpecification — now compiles with no implicit typing complaints
 const openingHoursSpecification = DAY_ORDER.filter((day) => siteHours[day] !== "closed").map(
   (day) => {
     const [opens, closes] = siteHours[day].split("–");
@@ -169,7 +164,6 @@ const businessSchema = {
         </ul>
       </div>
 
-      <!-- 3 & 4. Condensed service area + services lists -->
       <div>
         <h2 class={headingClasses}>
           <a href={toHref("#service-area")} class="hover:text-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm">
@@ -193,7 +187,6 @@ const businessSchema = {
         </ul>
       </div>
 
-      <!-- 8. Site section list (secondary nav / sitemap) -->
       <div>
         <h2 class={headingClasses}>Site Map</h2>
         <ul class="space-y-1.5 text-sm">
@@ -211,7 +204,6 @@ const businessSchema = {
       </div>
     </div>
 
-    <!-- 6 & 7. License/insurance + payment methods -->
     <div class="mt-12 pt-8 border-t border-gray-900 flex flex-col gap-3 text-xs text-gray-400 sm:flex-row sm:items-start sm:justify-between">
       <div class="space-y-1">
         <p>License {siteConfig.license} · Auto Repair Dealer {siteConfig.ard}</p>
@@ -227,7 +219,6 @@ const businessSchema = {
       )}
     </div>
 
-    <!-- 9 & 10. Legal links + copyright -->
     <div class="mt-8 pt-8 border-t border-gray-900 flex flex-col gap-4 text-sm sm:flex-row sm:items-center sm:justify-between">
       <ul class="flex flex-wrap gap-x-6 gap-y-2">
         <li><a href={`${base}privacy`} class={linkClasses}>Privacy Policy</a></li>

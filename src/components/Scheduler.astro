@@ -132,7 +132,6 @@ const categories = [...new Set(services.map((service) => service.category))];
 
       const duration = selectedJob.dataset.duration;
 
-      // TODO once Cal.com event type + identifiers exist:
       // lazy-load Cal.com embed script here, mount into #scheduler-embed
       // with duration and prefill values from the form fields above.
       console.log('Selected duration (minutes):', duration);

@@ -1,10 +1,4 @@
 ---
-// src/layouts/LegalLayout.astro
-// Shared wrapper for /privacy, /terms, /accessibility — Section 6 of the
-// build spec. Adds a visible breadcrumb and BreadcrumbList JSON-LD
-// (Section 7: "Consider BreadcrumbList if legal pages are indexed
-// separately") on top of the base Layout.
-
 import Layout from "./Layout.astro";
 import siteConfig from "../data/site-config.js";
 
@@ -61,10 +55,6 @@ const breadcrumbSchema = {
         {pageName}
       </h1>
       <p class="mt-2 text-sm text-gray-500">Last updated: {updatedDate}</p>
-
-      <!-- No typography plugin assumed — headings/paragraphs/lists inside
-           each legal page's slot bring their own utility classes (see
-           privacy.astro for the pattern). -->
       <div class="mt-8 space-y-6 text-gray-300 leading-relaxed">
         <slot />
       </div>

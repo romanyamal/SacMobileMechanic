@@ -1,4 +1,3 @@
-// Next model year through 1980, descending (newest first).
 const currentYear = new Date().getFullYear();
 export const years = Array.from(
   { length: currentYear + 1 - 1990 + 1 },

@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://romanyamal.github.io",
-  base: "/ZhuraMobileMechanic/",
+  base: "/SacMobileMechanic/",
   integrations: [sitemap()],
 
   compressHTML: true,
@@ -17,12 +17,11 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     css: {
-      // Forcefully disable sourcemaps so the mobile parser has absolutely zero extra bytes to read
       devSourcemap: false,
     },
     build: {
       minify: "esbuild",
-      sourcemap: false, // Ensures zero performance overhead in production builds
+      sourcemap: false,
     },
   },
 });
